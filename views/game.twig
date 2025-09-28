@@ -7,101 +7,39 @@
     <thead class="table-dark">
       <tr>
         <th>Figures</th>
-        {% if gameType == 'classic' %}
-            {% for joueur in joueurs %}
-                <th>{{ joueur.name }}</th>
+          {% for joueur in joueurs %}
+            {% for col in colonnesParJoueur %}
+              <th>
+                {{ joueur.name }}{% if col.label %} ({{ col.label }}){% endif %}
+              </th>
             {% endfor %}
-        {% elseif gameType == 'turbo' %}
-            {% for joueur in joueurs %}
-                <th>{{ joueur.name }} Descendante</th>
-                <th>{{ joueur.name }} Montante</th>
-                <th>{{ joueur.name }} Libre</th>
-            {% endfor %}
-        {% endif %}
+          {% endfor %}
       </tr>
     </thead>
     <tbody>
-      {% set figures = [
-        { label: 'As', name: 'as' },
-        { label: 'Deux', name: 'deux' },
-        { label: 'Trois', name: 'trois' },
-        { label: 'Quatre', name: 'quatre' },
-        { label: 'Cinq', name: 'cinq' },
-        { label: 'Six', name: 'six' }
-      ] %}
       {% for fig in figures %}
         <tr>
           <td>{{ fig.label }}</td>
           {% for joueur in joueurs %}
-            <td><input type="number" class="form-control" name="{{ fig.name }}_j{{ loop.index }}"></td>
+            {% for col in colonnesParJoueur %}
+              <td>
+                {% if fig.fixed is defined and fig.fixed %}
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide" value="{{ fig.fixed }}">
+                  <label class="form-check-label text-success fw-bold" for="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide">✔️</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule" value="0">
+                  <label class="form-check-label" for="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule">❌</label>
+                </div>
+                {% else %}
+                <input type="number" class="form-control" name="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}" {% if fig.readonly %}readonly{% endif %}>
+                {% endif %}
+              </td>
+            {% endfor %}
           {% endfor %}
         </tr>
       {% endfor %}
-
-      <tr class="table-secondary">
-        <td><b>Total supérieur</b></td>
-        {% for joueur in joueurs %}
-          <td><input type="number" class="form-control" name="total_sup_j{{ loop.index }}" readonly></td>
-        {% endfor %}
-      </tr>
-      <tr class="table-secondary">
-        <td>Bonus</td>
-        {% for joueur in joueurs %}
-          <td><input type="number" class="form-control" name="bonus_j{{ loop.index }}" readonly></td>
-        {% endfor %}
-      </tr>
-
-      {% set figures_inf = [
-        { label: 'Chance inf.', name: 'chance_inf' },
-        { label: 'Chance sup.', name: 'chance_sup' },
-        { label: 'Brelan', name: 'brelan' },
-        { label: 'Carré', name: 'carre' }
-      ] %}
-      {% for fig in figures_inf %}
-        <tr>
-          <td>{{ fig.label }}</td>
-          {% for joueur in joueurs %}
-            <td><input type="number" class="form-control" name="{{ fig.name }}_j{{ loop.index }}"></td>
-          {% endfor %}
-        </tr>
-      {% endfor %}
-
-      {% set figures_checkbox = [
-        { label: "Full", name: "full", value: 25 },
-        { label: "Petite suite", name: "petite_suite", value: 30 },
-        { label: "Grande suite", name: "grande_suite", value: 40 },
-        { label: "Yam's", name: "yams", value: 50 }
-      ] %}
-      {% for fig in figures_checkbox %}
-        <tr>
-          <td>{{ fig.label }}</td>
-          {% for joueur in joueurs %}
-            <td>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="{{ fig.name }}_j{{ loop.index }}_valide" name="{{ fig.name }}_j{{ loop.index }}_valide" value="{{ fig.value }}">
-                <label class="form-check-label text-success fw-bold" for="{{ fig.name }}_j{{ loop.index }}_valide">✔️</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="{{ fig.name }}_j{{ loop.index }}_annule" name="{{ fig.name }}_j{{ loop.index }}_annule" value="0">
-                <label class="form-check-label" for="{{ fig.name }}_j{{ loop.index }}_annule">❌</label>
-              </div>
-            </td>
-          {% endfor %}
-        </tr>
-      {% endfor %}
-
-      <tr class="table-secondary">
-        <td><b>Total inférieur</b></td>
-        {% for joueur in joueurs %}
-          <td><input type="number" class="form-control" name="total_inf_j{{ loop.index }}" readonly></td>
-        {% endfor %}
-      </tr>
-      <tr class="table-dark">
-        <td><b>TOTAL</b></td>
-        {% for joueur in joueurs %}
-          <td><input type="number" class="form-control" name="total_j{{ loop.index }}" readonly></td>
-        {% endfor %}
-      </tr>
     </tbody>
   </table>
 
