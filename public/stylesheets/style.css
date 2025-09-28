@@ -1,3 +1,10 @@
+/* Extra small input for compact score fields */
+.input-xs {
+  height: 1.5em;
+  padding: 0 2px;
+  font-size: 0.75em;
+  line-height: 1em;
+}
 a:visited {
   color: #00B7FF;
 }
@@ -14,3 +21,4 @@ body {
 a {
   color: #00B7FF;
 }
+

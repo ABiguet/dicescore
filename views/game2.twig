@@ -1,8 +1,8 @@
 {% extends 'layout.twig' %}
-
 {% block body %}
   <h1>{{title}}</h1>
-  <p>Welcome to{{title}}</p>
+  <p>Welcome to {{title}}</p>
+  <button class="btn btn-primary" id="resetBtn">Reset</button>
   <table class="table table-bordered table-striped text-center align-middle">
     <thead class="table-dark">
       <tr>
@@ -26,24 +26,24 @@
                 {% if fig.fixed is defined and fig.fixed %}
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox"
-                    name="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide"
-                    id="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide"
+                    name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide"
+                    id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide"
                     value="{{ fig.fixed }}">
-                  <label class="form-check-label text-success fw-bold" for="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide">✔️</label>
+                  <label class="form-check-label text-success fw-bold" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide">✔️</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox"
-                    name="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule"
-                    id="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule"
+                    name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule"
+                    id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule"
                     value="0">
-                  <label class="form-check-label" for="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule">❌</label>
+                  <label class="form-check-label" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule">❌</label>
                 </div>
                 {% else %}
-                <input type="number" class="form-control"
-                  name="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
-                  id="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
+                <input type="number" class="form-control input-xs"
+                  name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
+                  id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
                   {% if fig.readonly %}readonly{% endif %}>
-                <label for="{{ fig.name }}_{{ joueur.name|lower }}_{{ loop.parent.loop.index }}_{{ loop.index }}" class="visually-hidden">{{ fig.label }} {{ joueur.name }} Colonne {{ loop.parent.loop.index }}</label>
+                <label for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" class="visually-hidden">{{ fig.label }} {{ joueur.name }} Colonne {{ loop.parent.loop.index }}</label>
                 {% endif %}
               </td>
             {% endfor %}
@@ -52,6 +52,8 @@
       {% endfor %}
     </tbody>
   </table>
-
-<script src="/javascripts/yams2.js"></script>
+  <script>
+    window.yamFigures = {{ figures|json_encode|raw }};
+  </script>
+  <script src="/javascripts/yams2.js"></script>
 {% endblock %}

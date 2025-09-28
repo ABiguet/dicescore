@@ -22,8 +22,8 @@ exports.renderGame2 = (req, res) => {
   const config = yamConfig.modes[mode] || yamConfig.modes.turbo;
   // Prépare les joueurs, figures, colonnes, etc.
   const joueurs = [
-    { name: 'Aurélien'},
-    { name: 'Amélie' },
+    { name: 'Aurelien'},
+    { name: 'Amelie' },
   ];
   res.render('game2', {
     title: 'Yam\'s',
