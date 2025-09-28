@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Ici on va construire l'objet state
-    
+    const inputs = document.querySelectorAll('input[name]');
+    inputs.forEach(input => {
+        console.log(input.name, input.value);
+    });
 })

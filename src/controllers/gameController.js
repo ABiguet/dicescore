@@ -25,7 +25,7 @@ exports.renderGame2 = (req, res) => {
     { name: 'Aurélien'},
     { name: 'Amélie' },
   ];
-  res.render('game', {
+  res.render('game2', {
     title: 'Yam\'s',
     joueurs,
     figures: yamConfig.figures,
