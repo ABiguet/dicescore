@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const resetBtn = document.getElementById('resetBtn');
   if (resetBtn) {
     resetBtn.addEventListener('click', function() {
+      if (!confirm('Confirmer le reset ? Cette action est irréversible.')) return;
       // Vider l'objet state
       for (const playerId in state) {
         for (const col in state[playerId]) {
