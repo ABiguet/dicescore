@@ -1,0 +1,16 @@
+a:visited {
+  color: #00B7FF;
+}
+
+/* Coche verte pour les cases à cocher de validation */
+input[type="checkbox"].check-green:checked {
+  accent-color: #28a745;
+}
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}

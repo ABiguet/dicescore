@@ -1,0 +1,181 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+  <h1>{{title}}</h1>
+  <p>Welcome to {{title}}</p>
+  <table class="table table-bordered table-striped text-center align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>Figures</th>
+        <th>Joueur 1</th>
+        <th>Joueur 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>As</td>
+        <td><input type="number" class="form-control" name="as_j1"></td>
+        <td><input type="number" class="form-control" name="as_j2"></td>
+      </tr>
+      <tr>
+        <td>Deux</td>
+        <td><input type="number" class="form-control" name="deux_j1"></td>
+        <td><input type="number" class="form-control" name="deux_j2"></td>
+      </tr>
+      <tr>
+        <td>Trois</td>
+        <td><input type="number" class="form-control" name="trois_j1"></td>
+        <td><input type="number" class="form-control" name="trois_j2"></td>
+      </tr>
+      <tr>
+        <td>Quatre</td>
+        <td><input type="number" class="form-control" name="quatre_j1"></td>
+        <td><input type="number" class="form-control" name="quatre_j2"></td>
+      </tr>
+      <tr>
+        <td>Cinq</td>
+        <td><input type="number" class="form-control" name="cinq_j1"></td>
+        <td><input type="number" class="form-control" name="cinq_j2"></td>
+      </tr>
+      <tr>
+        <td>Six</td>
+        <td><input type="number" class="form-control" name="six_j1"></td>
+        <td><input type="number" class="form-control" name="six_j2"></td>
+      </tr>
+      <tr class="table-secondary">
+        <td><b>Total supérieur</b></td>
+        <td><input type="number" class="form-control" name="total_sup_j1" readonly></td>
+        <td><input type="number" class="form-control" name="total_sup_j2" readonly></td>
+      </tr>
+      <tr class="table-secondary">
+        <td>Bonus</td>
+        <td><input type="number" class="form-control" name="bonus_j1" readonly></td>
+        <td><input type="number" class="form-control" name="bonus_j2" readonly></td>
+      </tr>
+      <tr>
+        <td>Chance inf.</td>
+        <td><input type="number" class="form-control" name="chance_inf_j1"></td>
+        <td><input type="number" class="form-control" name="chance_inf_j2"></td>
+      </tr>
+      <tr>
+        <td>Chance sup.</td>
+        <td><input type="number" class="form-control" name="chance_sup_j1"></td>
+        <td><input type="number" class="form-control" name="chance_sup_j2"></td>
+      </tr>
+      <tr>
+        <td>Brelan</td>
+        <td><input type="number" class="form-control" name="brelan_j1"></td>
+        <td><input type="number" class="form-control" name="brelan_j2"></td>
+      </tr>
+      <tr>
+        <td>Carré</td>
+        <td><input type="number" class="form-control" name="carre_j1"></td>
+        <td><input type="number" class="form-control" name="carre_j2"></td>
+      </tr>
+      <tr>
+        <td>Full</td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="full_j1_valide" name="full_j1_valide" value="25">
+            <label class="form-check-label text-success fw-bold" for="full_j1_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="full_j1_annule" name="full_j1_annule" value="0">
+            <label class="form-check-label" for="full_j1_annule">❌</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="full_j2_valide" name="full_j2_valide" value="25">
+            <label class="form-check-label text-success fw-bold" for="full_j2_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="full_j2_annule" name="full_j2_annule" value="0">
+            <label class="form-check-label" for="full_j2_annule">❌</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Petite suite</td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="petite_suite_j1_valide" name="petite_suite_j1_valide" value="30">
+            <label class="form-check-label text-success fw-bold" for="petite_suite_j1_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="petite_suite_j1_annule" name="petite_suite_j1_annule" value="0">
+            <label class="form-check-label" for="petite_suite_j1_annule">❌</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="petite_suite_j2_valide" name="petite_suite_j2_valide" value="30">
+            <label class="form-check-label text-success fw-bold" for="petite_suite_j2_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="petite_suite_j2_annule" name="petite_suite_j2_annule" value="0">
+            <label class="form-check-label" for="petite_suite_j2_annule">❌</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Grande suite</td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="grande_suite_j1_valide" name="grande_suite_j1_valide" value="40">
+            <label class="form-check-label text-success fw-bold" for="grande_suite_j1_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="grande_suite_j1_annule" name="grande_suite_j1_annule" value="0">
+            <label class="form-check-label" for="grande_suite_j1_annule">❌</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="grande_suite_j2_valide" name="grande_suite_j2_valide" value="40">
+            <label class="form-check-label text-success fw-bold" for="grande_suite_j2_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="grande_suite_j2_annule" name="grande_suite_j2_annule" value="0">
+            <label class="form-check-label" for="grande_suite_j2_annule">❌</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Yam's</td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="yams_j1_valide" name="yams_j1_valide" value="50">
+            <label class="form-check-label text-success fw-bold" for="yams_j1_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="yams_j1_annule" name="yams_j1_annule" value="0">
+            <label class="form-check-label" for="yams_j1_annule">❌</label>
+          </div>
+        </td>
+        <td>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="yams_j2_valide" name="yams_j2_valide" value="50">
+            <label class="form-check-label text-success fw-bold" for="yams_j2_valide">✔️</label>
+          </div>
+          <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="yams_j2_annule" name="yams_j2_annule" value="0">
+            <label class="form-check-label" for="yams_j2_annule">❌</label>
+          </div>
+        </td>
+      </tr>
+      <tr class="table-secondary">
+        <td><b>Total inférieur</b></td>
+        <td><input type="number" class="form-control" name="total_inf_j1" readonly></td>
+        <td><input type="number" class="form-control" name="total_inf_j2" readonly></td>
+      </tr>
+      <tr class="table-dark">
+        <td><b>TOTAL</b></td>
+        <td><input type="number" class="form-control" name="total_j1" readonly></td>
+        <td><input type="number" class="form-control" name="total_j2" readonly></td>
+      </tr>
+    </tbody>
+  </table>
+
+<script src="/javascripts/yams.js"></script> 
+{% endblock %}

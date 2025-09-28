@@ -1,0 +1,73 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Logs
+logs/
+*.log
+
+# Runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+
+# Env
+.env
+.env.*
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PM2
+pids/
+*.pid
+pm2.log
+pm2.pid
+
+# Build
+/dist/
+/build/
+
+# Public uploads (si tu ajoutes des uploads dynamiques)
+public/uploads/
+
+# Autres fichiers temporaires
+*.swp
+*.swo
+
+# Mac
+.AppleDouble
+.LSOverride
+Icon?
+
+# Express
+*.bak
+
+# Test
+*.test.js
+
+# Logs Express
+*.log
+
+# SASS/SCSS cache
+.sass-cache/
+
+# Coverage reports
+coverage/
+
+# Misc
+.idea/
+*.iml
+
+# Twigs compilés (si applicable)
+*.twigc
