@@ -1,24 +1,23 @@
 /* Extra small input for compact score fields */
 .input-xs {
-  height: 1.5em;
-  padding: 0 2px;
-  font-size: 0.75em;
-  line-height: 1em;
+    height: 1.5em;
+    padding: 0 2px;
+    font-size: 0.75em;
+    line-height: 1em;
 }
 a:visited {
-  color: #00B7FF;
+    color: #00b7ff;
 }
 
 /* Coche verte pour les cases à cocher de validation */
 input[type="checkbox"].check-green:checked {
-  accent-color: #28a745;
+    accent-color: #28a745;
 }
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+    color: #00b7ff;
 }
-
