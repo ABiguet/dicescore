@@ -1,16 +1,15 @@
 {% extends 'layout.twig' %}
 {% block body %}
+	<a href="/">Retour</a>
 	<h1>{{title}}</h1>
-	<p>Welcome to
-		{{title}}</p>
-	<button class="btn btn-primary" id="resetBtn">Reset</button>
+	<button class="btn btn-danger" id="resetBtn">Reset</button><hr>
 	<table class="table table-bordered table-striped text-center align-middle">
 		<thead class="table-dark">
 			<tr>
 				<th>Figures</th>
 				{% for joueur in joueurs %}
 					{% for col in colonnesParJoueur %}
-						<th>
+						<th style="background: {{ joueur.color }};">
 							{{ joueur.name }}
 							{% if col.label %}
 								({{ col.label }})
