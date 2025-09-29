@@ -1,59 +1,57 @@
 {% extends 'layout.twig' %}
 {% block body %}
-  <h1>{{title}}</h1>
-  <p>Welcome to {{title}}</p>
-  <button class="btn btn-primary" id="resetBtn">Reset</button>
-  <table class="table table-bordered table-striped text-center align-middle">
-    <thead class="table-dark">
-      <tr>
-        <th>Figures</th>
-          {% for joueur in joueurs %}
-            {% for col in colonnesParJoueur %}
-              <th>
-                {{ joueur.name }}{% if col.label %} ({{ col.label }}){% endif %}
-              </th>
-            {% endfor %}
-          {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for fig in figures %}
-        <tr>
-          <td>{{ fig.label }}</td>
-          {% for joueur in joueurs %}
-            {% for col in colonnesParJoueur %}
-              <td>
-                {% if fig.fixed is defined and fig.fixed %}
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox"
-                    name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide"
-                    id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide"
-                    value="{{ fig.fixed }}">
-                  <label class="form-check-label text-success fw-bold" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide">✔️</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox"
-                    name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule"
-                    id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule"
-                    value="0">
-                  <label class="form-check-label" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule">❌</label>
-                </div>
-                {% else %}
-                <input type="number" class="form-control input-xs"
-                  name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
-                  id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}"
-                  {% if fig.readonly %}readonly{% endif %}>
-                <label for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" class="visually-hidden">{{ fig.label }} {{ joueur.name }} Colonne {{ loop.parent.loop.index }}</label>
-                {% endif %}
-              </td>
-            {% endfor %}
-          {% endfor %}
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <script>
-    window.yamFigures = {{ figures|json_encode|raw }};
-  </script>
-  <script src="/javascripts/yams.js"></script>
+	<h1>{{title}}</h1>
+	<p>Welcome to
+		{{title}}</p>
+	<button class="btn btn-primary" id="resetBtn">Reset</button>
+	<table class="table table-bordered table-striped text-center align-middle">
+		<thead class="table-dark">
+			<tr>
+				<th>Figures</th>
+				{% for joueur in joueurs %}
+					{% for col in colonnesParJoueur %}
+						<th>
+							{{ joueur.name }}
+							{% if col.label %}
+								({{ col.label }})
+							{% endif %}
+						</th>
+					{% endfor %}
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for fig in figures %}
+				<tr>
+					<td>{{ fig.label }}</td>
+					{% for joueur in joueurs %}
+						{% for col in colonnesParJoueur %}
+							<td>
+								{% if fig.fixed is defined and fig.fixed %}
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide" value="{{ fig.fixed }}">
+										<label class="form-check-label text-success fw-bold" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_valide">✔️</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule" value="0">
+										<label class="form-check-label" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule">❌</label>
+									</div>
+								{% else %}
+									<input type="number" class="form-control input-xs" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" {% if fig.readonly %} readonly {% endif %}>
+									<label for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" class="visually-hidden">{{ fig.label }}
+										{{ joueur.name }}
+										Colonne
+										{{ loop.parent.loop.index }}</label>
+								{% endif %}
+							</td>
+						{% endfor %}
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<script>
+		window.yamFigures = {{ figures|json_encode|raw }};
+	</script>
+	<script type="module" src="/javascripts/yams/main.js"></script>
 {% endblock %}

@@ -3,11 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
 var indexRouter = require('./src/routes/index');
 var gameRouter = require('./src/routes/game');
 
 var app = express();
+
+app.use(session({
+  secret: 'super-key-of-the-death',
+  resave: true,
+  saveUninitialized: true
+}));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

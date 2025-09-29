@@ -1,13 +1,11 @@
 const yamConfig = require('../config/yamConfig').default;
 
-exports.renderGame2 = (req, res) => {
-  const mode = req.query.mode || 'Turbo';
-  const config = yamConfig.modes[mode] || yamConfig.modes.turbo;
+exports.renderGame = (req, res) => {
+
   // Prépare les joueurs, figures, colonnes, etc.
-  const joueurs = [
-    { name: 'Aurelien'},
-    { name: 'Amelie' },
-  ];
+  const mode = req.session.mode || 'turbo';
+  const joueurs = (req.session.players || ['Alice', 'Bob']).map(name => ({ name }));
+  const config = yamConfig.modes[mode] || yamConfig.modes.turbo;
   res.render('game', {
     title: 'Yam\'s',
     joueurs,
