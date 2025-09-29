@@ -2,7 +2,20 @@
 {% block body %}
 	<a href="/">Retour</a>
 	<h1>{{title}}</h1>
-	<button class="btn btn-danger" id="resetBtn">Reset</button><hr>
+	<button class="btn btn-secondary mb-2" id="toggleTotalsBtn" type="button">Afficher les totaux</button>
+	<div id="totalsTableWrapper" style="display:none;">
+		<ul class="list-group">
+			{% for joueur in joueurs %}
+				<li class="list-group-item">
+					Total
+					<span style="color: {{ joueur.color }};">{{ joueur.name }}</span>
+					:
+					<input type="number" id="total_joueur_{{ loop.index }}_global" name="total_joueur_{{ loop.index }}_global" readonly>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<hr>
 	<table class="table table-bordered table-striped text-center align-middle">
 		<thead class="table-dark">
 			<tr>
@@ -49,8 +62,23 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<button class="btn btn-danger" id="resetBtn">Reset</button>
 	<script>
 		window.yamFigures = {{ figures|json_encode|raw }};
+		document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('toggleTotalsBtn');
+        const wrapper = document.getElementById('totalsTableWrapper');
+        btn.addEventListener('click', function() {
+            if (wrapper.style.display === 'none') {
+                wrapper.style.display = '';
+                btn.textContent = 'Masquer les totaux';
+            } else {
+                wrapper.style.display = 'none';
+                btn.textContent = 'Afficher les totaux';
+            }
+        });
+    });
 	</script>
+
 	<script type="module" src="/javascripts/yams/main.js"></script>
 {% endblock %}

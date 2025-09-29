@@ -4,53 +4,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const playerList = document.getElementById('playerList');
     const newGameBtn = document.getElementById('newGameBtn');
 
+    function createPlayerElement(name, color = '#ff0000') {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center player-input';
+        li.innerHTML = `
+            <span class="player-name">${name}</span>
+            <input type="color" name="playerColor" value="${color}">
+            <button class="btn btn-danger btn-sm remove-player-btn">Supprimer</button>
+        `;
+        return li;
+    }
+
+    function addPlayer(name, color) {
+        if (!name) return;
+        playerList.appendChild(createPlayerElement(name, color));
+        newPlayerName.value = '';
+    }
+
     // Pré-remplir la liste si window.joueurs existe
     if (window.joueurs && Array.isArray(window.joueurs)) {
         window.joueurs.forEach(joueur => {
-            const li = document.createElement('li');
-            li.className = 'list-group-item d-flex justify-content-between align-items-center player-input';
-            li.innerHTML = `
-                ${joueur.name || joueur}
-                <input type="color" name="playerColor" value="${joueur.color || '#ff0000'}">
-                <button class="btn btn-danger btn-sm remove-player-btn">Supprimer</button>
-            `;
-            playerList.appendChild(li);
+            addPlayer(joueur.name || joueur, joueur.color || '#ff0000');
         });
     }
 
-    function addPlayer() {
-        const playerName = newPlayerName.value.trim();
-        if (playerName) {
-            const li = document.createElement('li');
-            li.className = 'list-group-item d-flex justify-content-between align-items-center player-input';
-            li.innerHTML = `
-                ${playerName}
-                <input type="color" name="playerColor" value="#ff0000">
-                <button class="btn btn-danger btn-sm remove-player-btn">Supprimer</button>
-            `;
-            playerList.appendChild(li);
-            newPlayerName.value = '';
-        }
-    }
-    addPlayerBtn.addEventListener('click', addPlayer);
+    addPlayerBtn.addEventListener('click', function() {
+        addPlayer(newPlayerName.value.trim());
+    });
 
     newPlayerName.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
-            addPlayer();
+            addPlayer(newPlayerName.value.trim());
         }
     });
 
-    // supprimer joueur de la liste
-    playerList.addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-player-btn')) {
-            const li = event.target.closest('li');
-            if (li) li.remove();
+    // Suppression d'un joueur (event delegation)
+    playerList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-player-btn')) {
+            e.target.closest('li').remove();
         }
     });
 
     newGameBtn.addEventListener('click', function() {
-        const players = [...document.querySelectorAll('.player-input')].map(li => {
-            const name = li.childNodes[0].textContent.trim();
+        const players = [...playerList.querySelectorAll('.player-input')].map(li => {
+            const name = li.querySelector('.player-name').textContent.trim();
             const color = li.querySelector('input[type="color"]').value;
             return { name, color };
         }).filter(player => player.name);

@@ -8,7 +8,9 @@ export function recalcAll() {
   const figuresSup = getFiguresSup();
   const figuresInf = getFiguresInf();
   const figuresFixes = getFiguresFixes();
+  let totalTurbo = 0;
   for (const playerId in state) {
+    totalTurbo = 0;
     for (const col in state[playerId]) {
       // Total supérieur
       const totalSup = figuresSup.reduce((sum, fig) => sum + (parseInt(state[playerId][col][fig]) || 0), 0);
@@ -30,7 +32,10 @@ export function recalcAll() {
       // Total général
       const total = totalSup + bonus + totalInf;
       setInputValue(`total_${playerId}_${col}`, total);
+
+      totalTurbo += total;
     }
+    setInputValue(`total_joueur_${playerId}_global`, totalTurbo);
   }
   saveState();
 }
