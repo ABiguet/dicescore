@@ -5,7 +5,6 @@ import {
     getFiguresSup,
     getFiguresInf,
     getFiguresFixes,
-    getFigureMultiple,
 } from "./config.js";
 import { setInputValue } from "./ui.js";
 
@@ -20,8 +19,7 @@ export function recalcAll() {
         for (const col in state[playerId]) {
             // Total supérieur
             const totalSup = figuresSup.reduce(
-                (sum, fig) => sum + (parseInt(state[playerId][col][fig]) || 0),
-                0
+                (sum, fig) => sum + (parseInt(state[playerId][col][fig]) || 0), 0
             );
             setInputValue(`totalSup_${playerId}_${col}`, totalSup);
 
@@ -32,14 +30,9 @@ export function recalcAll() {
             // Total inférieur
             const totalInf = figuresInf.reduce((sum, fig) => {
                 if (figuresFixes.includes(fig)) {
-                    return (
-                        sum +
-                        (state[playerId][col][`${fig}_valide`]
-                            ? parseInt(
-                                  figures.find((f) => f.name === fig).fixed
-                              )
-                            : 0)
-                    );
+                    const isValid = state[playerId][col][`${fig}_valide`];
+                    const fixedValue = figures.find(f => f.name === fig).fixed;
+                    return sum + (isValid ? parseInt(fixedValue) : 0);
                 }
                 return sum + (parseInt(state[playerId][col][fig]) || 0);
             }, 0);
