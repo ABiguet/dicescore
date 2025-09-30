@@ -1,0 +1,14 @@
+node_modules/
+public/images/
+public/stylesheets/
+public/javascripts/
+logs/
+dist/
+build/
+*.log
+*.min.js
+*.min.css
+package-lock.json
+package.json
+yarn.lock
+pm2.config.js

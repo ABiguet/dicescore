@@ -48,11 +48,7 @@ const modes = {
     },
     turbo: {
         name: "Turbo",
-        columns: [
-            { label: "Descendante" },
-            { label: "Montante" },
-            { label: "Libre" },
-        ],
+        columns: [{ label: "Descendante" }, { label: "Montante" }, { label: "Libre" }],
     },
 };
 

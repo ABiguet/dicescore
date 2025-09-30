@@ -15,7 +15,7 @@ app.use(
         secret: "super-key-of-the-death",
         resave: true,
         saveUninitialized: true,
-    })
+    }),
 );
 
 // view engine setup
