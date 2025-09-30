@@ -5,8 +5,8 @@ exports.renderGame = (req, res) => {
     const mode = req.session.mode || 'turbo';
     const joueurs = req.session.players;
     // const joueurs = [
-    //     { name: 'Alice', color: '#ff0000' },
-    //     { name: 'Bob', color: '#00ff00' },
+    //     { name: 'Alice', color: '#012381ff' },
+    //     { name: 'Bob', color: '#005200ff' },
     // ]; 
     // Vérifie si des joueurs sont présents
     if (!joueurs || joueurs.length === 0) {

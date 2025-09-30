@@ -55,20 +55,3 @@ export function recalcAll() {
     }
     saveState();
 }
-
-export function calcMultiple(input, action) {
-    const multiple = getFigureMultiple(input);
-    const currentValue = Number(input.value) || 0;
-    if (action === 'increment') {
-        if (currentValue + multiple > (multiple * 5)) {
-            input.value = multiple * 5;
-        } else {
-            input.value = currentValue + multiple;
-        }
-    } else if (action === 'decrement') {
-        input.value = Math.max(0, currentValue - multiple);
-    }
-    syncInputWithState(input, "toState");
-    recalcAll();
-}
-
