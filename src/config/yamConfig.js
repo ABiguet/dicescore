@@ -25,7 +25,7 @@ const modes = {
     classic: { name: 'Classique', columns: [{ label: '' }] },
     turbo: {
         name: 'Turbo',
-        columns: [{ label: 'Descendante' }, { label: 'Montante' }, { label: 'Libre' }],
+        columns: [{ label: '<i class="bi bi-arrow-down"></i>' }, { label: '<i class="bi bi-arrow-up"></i>' }, { label: '<i class="bi bi-arrow-down-up"></i>' }],
     },
 };
 

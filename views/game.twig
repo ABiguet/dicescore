@@ -25,7 +25,7 @@
 						<th style="background: {{ joueur.color }};">
 							{{ joueur.name }}
 							{% if col.label %}
-								({{ col.label }})
+								<b>{{ col.label }}</b>
 							{% endif %}
 						</th>
 					{% endfor %}
@@ -54,7 +54,7 @@
 											<button class="btn btn-outline-secondary decrement-btn" type="button" id="decrementBtn">
 												<i class="bi bi-dash" style="color: red; font-size: 0.8rem;"></i>
 											</button>
-											<input type="number" class="form-control" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" step="{{ fig.multiple }}" max="{{ fig.multiple * 5 }}">
+											<input type="number" class="form-control text-center" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" step="{{ fig.multiple }}" max="{{ fig.multiple * 5 }}">
 											<button class="btn btn-outline-secondary increment-btn" type="button" id="incrementBtn">
 												<i class="bi bi-plus" style="color: green; font-size: 0.8rem;"></i>
 											</button>
