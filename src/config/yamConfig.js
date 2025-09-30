@@ -1,12 +1,12 @@
 // yamConfig.js
 
 const figures = [
-    { label: 'As', name: 'as', zone: 'sup' },
-    { label: 'Deux', name: 'deux', zone: 'sup' },
-    { label: 'Trois', name: 'trois', zone: 'sup' },
-    { label: 'Quatre', name: 'quatre', zone: 'sup' },
-    { label: 'Cinq', name: 'cinq', zone: 'sup' },
-    { label: 'Six', name: 'six', zone: 'sup' },
+    { label: 'As', name: 'as', zone: 'sup', multiple: 1 },
+    { label: 'Deux', name: 'deux', zone: 'sup', multiple: 2 },
+    { label: 'Trois', name: 'trois', zone: 'sup', multiple: 3 },
+    { label: 'Quatre', name: 'quatre', zone: 'sup', multiple: 4 },
+    { label: 'Cinq', name: 'cinq', zone: 'sup', multiple: 5 },
+    { label: 'Six', name: 'six', zone: 'sup', multiple: 6 },
     { label: '<b>Total supérieur</b>', name: 'totalSup', readonly: true, zone: 'sup' },
     { label: '<b>Bonus (35 si ≥63)</b>', name: 'bonus', readonly: true, zone: 'sup' },
     { label: 'Chance inf.', name: 'chanceInf', zone: 'inf' },

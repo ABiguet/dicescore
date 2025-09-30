@@ -1,6 +1,7 @@
 import { state, loadState, resetState } from "./state.js";
 import { syncInputWithState } from "./ui.js";
 import { recalcAll } from "./calc.js";
+import { getFigureMultiple } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     loadState();
@@ -33,6 +34,34 @@ document.addEventListener("DOMContentLoaded", function () {
             recalcAll();
         });
     }
+
+    // Handler pour le bouton increment
+    document.querySelectorAll('.increment-btn').forEach(btn => {
+        btn.addEventListener('click', function(event) {
+            const input = event.currentTarget.closest('.input-group').querySelector('input');
+            const multiple = getFigureMultiple(input);
+            const currentValue = Number(input.value) || 0;
+            if (currentValue + multiple > (multiple * 5)) {
+                input.value = multiple * 5;
+            } else {
+                input.value = currentValue + multiple;
+            }
+            syncInputWithState(input, "toState");
+            recalcAll();
+        });
+    });
+
+    // Handler pour le bouton decrement
+    document.querySelectorAll('.decrement-btn').forEach(btn => {
+        btn.addEventListener('click', function(event) {
+            const input = event.currentTarget.closest('.input-group').querySelector('input');
+            const multiple = getFigureMultiple(input);
+            const currentValue = Number(input.value) || 0;
+            input.value = Math.max(0, currentValue - multiple);
+            syncInputWithState(input, "toState");
+            recalcAll(); 
+        });
+    });
 
     // Recalcule tout à l'initialisation (pour afficher les totaux corrects)
     recalcAll();

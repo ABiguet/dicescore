@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 {% block body %}
 	<a href="/">Retour</a>
-	<h1>{{title}}</h1>
+	<h1>{{ title }}</h1>
 	<button class="btn btn-secondary mb-2" id="toggleTotalsBtn" type="button">Afficher les totaux</button>
 	<div id="totalsTableWrapper" style="display:none;">
 		<ul class="list-group">
@@ -49,11 +49,24 @@
 										<label class="form-check-label" for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}_annule">❌</label>
 									</div>
 								{% else %}
-									<input type="number" class="form-control input-xs text-center" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" {% if fig.readonly %} readonly {% endif %}>
+									{% if fig.multiple %}
+										<div class="input-group input-group-sm">
+											<button class="btn btn-outline-secondary decrement-btn" type="button" id="decrementBtn">
+												<i class="bi bi-dash" style="color: red; font-size: 0.8rem;"></i>
+											</button>
+											<input type="number" class="form-control" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" step="{{ fig.multiple }}" max="{{ fig.multiple * 5 }}">
+											<button class="btn btn-outline-secondary increment-btn" type="button" id="incrementBtn">
+												<i class="bi bi-plus" style="color: green; font-size: 0.8rem;"></i>
+											</button>
+										</div>
+									{% else %}
+										<input type="number" class="form-control input-xs text-center" name="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" id="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" {% if fig.readonly %} readonly {% endif %}>
+									{% endif %}
 									<label for="{{ fig.name }}_{{ loop.parent.loop.index }}_{{ loop.index }}" class="visually-hidden">{{ fig.label }}
 										{{ joueur.name }}
 										Colonne
-										{{ loop.parent.loop.index }}</label>
+										{{ loop.parent.loop.index }}
+									</label>
 								{% endif %}
 							</td>
 						{% endfor %}
@@ -63,22 +76,21 @@
 		</tbody>
 	</table>
 	<button class="btn btn-danger" id="resetBtn">Reset</button>
-	<script>
+	<script type="text/javascript">
 		window.yamFigures = {{ figures|json_encode|raw }};
-document.addEventListener('DOMContentLoaded', function () {
-const btn = document.getElementById('toggleTotalsBtn');
-const wrapper = document.getElementById('totalsTableWrapper');
-btn.addEventListener('click', function () {
-if (wrapper.style.display === 'none') {
-wrapper.style.display = '';
-btn.textContent = 'Masquer les totaux';
-} else {
-wrapper.style.display = 'none';
-btn.textContent = 'Afficher les totaux';
-}
-});
-});
+		document.addEventListener('DOMContentLoaded', function () {
+			const btn = document.getElementById('toggleTotalsBtn');
+			const wrapper = document.getElementById('totalsTableWrapper');
+			btn.addEventListener('click', function () {
+				if (wrapper.style.display === 'none') {
+					wrapper.style.display = '';
+					btn.textContent = 'Masquer les totaux';
+				} else {
+					wrapper.style.display = 'none';
+					btn.textContent = 'Afficher les totaux';
+				}
+			});
+		});
 	</script>
-
 	<script type="module" src="/javascripts/yams/main.js"></script>
 {% endblock %}
