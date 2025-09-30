@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const flash = require('express-flash');
 
 var indexRouter = require('./src/routes/index');
 var gameRouter = require('./src/routes/game');
@@ -17,6 +18,7 @@ app.use(
         saveUninitialized: true,
     }),
 );
+app.use(flash());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
