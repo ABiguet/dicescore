@@ -47,7 +47,7 @@
                             <td>
                                 <input type="color" name="player-color" value="{{ playerDb.color }}">
                             </td>
-                            <td></td>
+                            <td><button class="btn btn-danger btn-sm delete-player-btn" data-player-id="{{ playerDb.id }}">Supprimer</button></td>
                         </tr>
                     {% endfor %}
                     <!-- add players dynamically here -->
