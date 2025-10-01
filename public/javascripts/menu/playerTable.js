@@ -73,10 +73,20 @@ export class PlayerTable {
         const newPlayerRow = document.getElementById("newPlayerRow");
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td><a href="#" class="add-player-to-game-btn text-green"><i class="bi bi-plus-circle"></i></a></td>
-            <td data-player-name="${player.name}">${player.name}</td>
-            <td><input type="color" name="player-color" value="${player.color}"></td>
-            <td><button class="btn btn-danger btn-sm delete-player-btn" data-player-id="${player.id}">Supprimer</button></td>
+            <td class="text-center">
+                <a href="#" class="add-player-to-game-btn text-success" title="Ajouter à la partie">
+                    <i class="bi bi-plus-circle fs-5"></i>
+                </a>
+            </td>
+            <td data-player-name="${player.name}" class="fw-medium">${player.name}</td>
+            <td>
+                <input type="color" class="form-control form-control-color" name="player-color" value="${player.color}" title="Couleur du joueur">
+            </td>
+            <td class="text-center">
+                <button class="btn btn-outline-danger btn-sm delete-player-btn" data-player-id="${player.id}" title="Supprimer le joueur">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
         `;
         this.tableBodyElement.insertBefore(tr, newPlayerRow);
     }

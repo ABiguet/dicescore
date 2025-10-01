@@ -1,68 +1,137 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col">
-        <h1>{{title}}</h1>
-            <p>Saisissez les informations de partie</p>
-            <!-- Radio button permettant le choix entre partie classic et partie turbo -->
-            <div class="mb-3">
-                <label class="form-label">Type de partie :</label>
-                <div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gameType" id="classicGame" value="classic">
-                        <label class="form-check-label" for="classicGame">Classique</label>
+    <!-- Header avec titre et icône -->
+    <div class="text-center mb-4">
+        <h1 class="display-4 text-primary">
+            <i class="bi bi-dice-6 me-2"></i>{{ title }}
+        </h1>
+        <p class="lead text-muted">Configurez votre partie de Yahtzee</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Configuration de partie -->
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-gear-fill me-2"></i>Configuration
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Type de partie -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Type de partie :</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gameType" id="classicGame" value="classic">
+                                <label class="form-check-label" for="classicGame">
+                                    <i class="bi bi-clock me-1"></i>Classique
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gameType" id="turboGame" value="turbo" checked>
+                                <label class="form-check-label" for="turboGame">
+                                    <i class="bi bi-lightning-fill me-1"></i>Turbo
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gameType" id="turboGame" value="turbo" checked>
-                        <label class="form-check-label" for="turboGame">Turbo</label>
+
+                    <hr>
+
+                    <!-- Ajouter joueur temporaire -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Ajouter un joueur :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="newPlayerName" placeholder="Nom du joueur">
+                            <button class="btn btn-primary" id="addPlayerBtn">
+                                <i class="bi bi-plus-circle me-1"></i>Ajouter
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Liste des joueurs pour la partie -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Joueurs sélectionnés :</label>
+                        <ul id="playerList" class="list-group"></ul>
+                        <div class="text-muted small mt-2" id="playerCount">Aucun joueur sélectionné</div>
+                    </div>
+
+                    <!-- Bouton démarrer -->
+                    <div class="d-grid">
+                        <button class="btn btn-success btn-lg" id="newGameBtn">
+                            <i class="bi bi-play-fill me-2"></i>Démarrer la partie
+                        </button>
                     </div>
                 </div>
             </div>
-            <hr>
-            <p>Ajouter un joueur :
-                <input type="text" id="newPlayerName" placeholder="Nom du joueur">
-                <button class="btn btn-primary" id="addPlayerBtn">Ajouter</button>
-            </p>
-            <ul id="playerList" class="list-group mb-3"></ul>
-            <button class="btn btn-success" id="newGameBtn">Nouvelle Partie</button>
         </div>
-        <div class="col">
-            <h1>Joueurs</h1>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Nom</th>
-                        <th>Couleur</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="playersTableBody">
-                    <!-- Les joueurs seront ajoutés ici dynamiquement -->
-                    {% for playerDb in playersDb %}
-                        <tr>
-                            <td><a href="#" class="add-player-to-game-btn text-green"><i class="bi bi-plus-circle"></i></a></td>
-                            <td data-player-name="{{ playerDb.name }}">{{ playerDb.name }}</td>
-                            <td>
-                                <input type="color" name="player-color" value="{{ playerDb.color }}">
-                            </td>
-                            <td><button class="btn btn-danger btn-sm delete-player-btn" data-player-id="{{ playerDb.id }}">Supprimer</button></td>
-                        </tr>
-                    {% endfor %}
-                    <!-- add players dynamically here -->
-                    <tr id="newPlayerRow">
-                        <td></td>
-                        <td><input type="text" name="playerName" placeholder="Nouveau joueur"></td>
-                        <td>
-                            <input type="color" name="playerColor" value="#ff0000">
-                        </td>
-                        <td>
-                            <button class="btn btn-success btn-sm" id="createPlayerBtn">Créer</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <!-- Gestion des joueurs -->
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-people-fill me-2"></i>Gestion des joueurs
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th width="10%" class="text-center">Action</th>
+                                    <th width="40%">Nom</th>
+                                    <th width="30%">Couleur</th>
+                                    <th width="20%" class="text-center">Suppr.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="playersTableBody">
+                                {% for playerDb in playersDb %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <a href="#" class="add-player-to-game-btn text-success" title="Ajouter à la partie">
+                                                <i class="bi bi-plus-circle fs-5"></i>
+                                            </a>
+                                        </td>
+                                        <td data-player-name="{{ playerDb.name }}" class="fw-medium">{{ playerDb.name }}</td>
+                                        <td>
+                                            <input type="color" class="form-control form-control-color" name="player-color" value="{{ playerDb.color }}" title="Couleur du joueur">
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-danger btn-sm delete-player-btn" data-player-id="{{ playerDb.id }}" title="Supprimer le joueur">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <!-- Ligne d'ajout de nouveau joueur -->
+                                <tr id="newPlayerRow" class="table-active">
+                                    <td class="text-center">
+                                        <i class="bi bi-plus text-muted"></i>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" name="playerName" placeholder="Nouveau joueur">
+                                    </td>
+                                    <td>
+                                        <input type="color" class="form-control form-control-color form-control-sm" name="playerColor" value="#ff0000">
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-success btn-sm" id="createPlayerBtn" title="Créer le joueur">
+                                            <i class="bi bi-check-lg"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-muted small">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Cliquez sur <i class="bi bi-plus-circle text-success"></i> pour ajouter un joueur à la partie
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 	
