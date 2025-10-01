@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const newPlayerName = document.getElementById("newPlayerName");
     const playerList = document.getElementById("playerList");
     const newGameBtn = document.getElementById("newGameBtn");
+    const createPlayerBtn = document.getElementById("createPlayerBtn");
 
     function createPlayerElement(name, color = "#ff0000") {
         const li = document.createElement("li");
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "list-group-item d-flex justify-content-between align-items-center player-input";
         li.innerHTML = `
             <span class="player-name">${name}</span>
-            <input type="color" name="playerColor" value="${color}">
+            <input type="color" name="player-color" value="${color}">
             <button class="btn btn-danger btn-sm remove-player-btn">Supprimer</button>
         `;
         return li;
@@ -22,10 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
         newPlayerName.value = "";
     }
 
-    // Pré-remplir la liste si window.joueurs existe
-    if (window.joueurs && Array.isArray(window.joueurs)) {
-        window.joueurs.forEach((joueur) => {
-            addPlayer(joueur.name || joueur, joueur.color || "#ff0000");
+    // Pré-remplir la liste si window.players existe
+    if (window.players && Array.isArray(window.players)) {
+        window.players.forEach((player) => {
+            addPlayer(player.name || player, player.color || "#ff0000");
         });
     }
 
@@ -66,5 +67,45 @@ document.addEventListener("DOMContentLoaded", function () {
         }).then((res) => {
             if (res.ok) window.location.href = "/game";
         });
+    });
+
+    createPlayerBtn.addEventListener("click", async function () {
+        const newPlayerRow = document.getElementById("newPlayerRow");
+        const playerName = newPlayerRow.querySelector('input[name="playerName"]').value.trim();
+        const playerColor = newPlayerRow.querySelector('input[name="playerColor"]').value;
+        if (!playerName) return;
+
+        // Envoi AJAX vers l'API Express
+        const res = await fetch("/api/players", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: playerName, color: playerColor }),
+        });
+        if (res.ok) {
+            const player = await res.json();
+            // Ajoute la ligne dans le tableau HTML
+            const tbody = document.getElementById("playersTableBody");
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td><a href="#" class="add-player-to-game-btn text-green"><i class="bi bi-plus-circle"></i></a></td>
+                <td data-player-name="${player.name}">${player.name}</td>
+                <td><input type="color" name="player-color" value="${player.color}"></td>
+                <td></td>
+            `;
+            tbody.insertBefore(tr, newPlayerRow);
+            // Optionnel : reset les inputs
+            newPlayerRow.querySelector('input[name="playerName"]').value = "";
+            newPlayerRow.querySelector('input[name="playerColor"]').value = "#ff0000";
+        }
+    });
+    document.getElementById("playersTableBody").addEventListener("click", function (e) {
+        // Cherche le bouton même si on clique sur l'icône à l'intérieur
+        const btn = e.target.closest(".add-player-to-game-btn");
+        if (btn) {
+            const tr = btn.closest("tr");
+            const playerName = tr.querySelector("[data-player-name]").dataset.playerName;
+            const playerColor = tr.querySelector('input[type="color"]').value;
+            addPlayer(playerName, playerColor);
+        }
     });
 });

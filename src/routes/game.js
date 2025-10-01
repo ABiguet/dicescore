@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import gameController from '../controllers/gameController.js';
 const router = express.Router();
-const gameController = require('../controllers/gameController');
 
 router.get('/game', gameController.renderGame);
 router.post('/init-game', (req, res) => {
@@ -9,4 +9,4 @@ router.post('/init-game', (req, res) => {
     res.sendStatus(200);
 });
 
-module.exports = router;
+export default router;

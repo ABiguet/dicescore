@@ -1,13 +1,10 @@
-const yamConfig = require('../config/yamConfig').default;
+import yamConfig from '../config/yamConfig.js';
 
-exports.renderGame = (req, res) => {
+const renderGame = (req, res) => {
     // Prépare les joueurs, figures, colonnes, etc.
     const mode = req.session.mode || 'turbo';
     const joueurs = req.session.players;
-    //  const joueurs = [
-    //      { name: 'Alice', color: '#012381ff' },
-    //      { name: 'Bob', color: '#005200ff' },
-    //  ];
+
     // Vérifie si des joueurs sont présents
     if (!joueurs || joueurs.length === 0) {
         req.flash('error', 'Aucun joueur défini pour la partie.');
@@ -22,4 +19,8 @@ exports.renderGame = (req, res) => {
         colonnesParJoueur: config.columns,
         mode: config.name,
     });
+};
+
+export default {
+    renderGame,
 };

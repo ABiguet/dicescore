@@ -21,3 +21,8 @@ body {
 a {
     color: #00b7ff;
 }
+
+.add-player-to-game-btn {
+    color: #28a745 !important;
+    font-size: 1.2em;
+}

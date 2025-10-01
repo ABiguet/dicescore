@@ -1,31 +1,73 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-	<h1>{{title}}</h1>
-	<p>Saisissez les informations de partie</p>
-	<!-- Radio button permettant le choix entre partie classic et partie turbo -->
-	<div class="mb-3">
-		<label class="form-label">Type de partie :</label>
-		<div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="gameType" id="classicGame" value="classic">
-				<label class="form-check-label" for="classicGame">Classique</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="gameType" id="turboGame" value="turbo" checked>
-				<label class="form-check-label" for="turboGame">Turbo</label>
-			</div>
-		</div>
-	</div>
-	<hr>
-	<p>Ajouter un joueur :
-		<input type="text" id="newPlayerName" placeholder="Nom du joueur">
-		<button class="btn btn-primary" id="addPlayerBtn">Ajouter</button>
-	</p>
-	<ul id="playerList" class="list-group mb-3"></ul>
-	<button class="btn btn-success" id="newGameBtn">Nouvelle Partie</button>
+    <div class="row">
+        <div class="col">
+        <h1>{{title}}</h1>
+            <p>Saisissez les informations de partie</p>
+            <!-- Radio button permettant le choix entre partie classic et partie turbo -->
+            <div class="mb-3">
+                <label class="form-label">Type de partie :</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gameType" id="classicGame" value="classic">
+                        <label class="form-check-label" for="classicGame">Classique</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gameType" id="turboGame" value="turbo" checked>
+                        <label class="form-check-label" for="turboGame">Turbo</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <p>Ajouter un joueur :
+                <input type="text" id="newPlayerName" placeholder="Nom du joueur">
+                <button class="btn btn-primary" id="addPlayerBtn">Ajouter</button>
+            </p>
+            <ul id="playerList" class="list-group mb-3"></ul>
+            <button class="btn btn-success" id="newGameBtn">Nouvelle Partie</button>
+        </div>
+        <div class="col">
+            <h1>Joueurs</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Couleur</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="playersTableBody">
+                    <!-- Les joueurs seront ajoutés ici dynamiquement -->
+                    {% for playerDb in playersDb %}
+                        <tr>
+                            <td><a href="#" class="add-player-to-game-btn text-green"><i class="bi bi-plus-circle"></i></a></td>
+                            <td data-player-name="{{ playerDb.name }}">{{ playerDb.name }}</td>
+                            <td>
+                                <input type="color" name="player-color" value="{{ playerDb.color }}">
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    <!-- add players dynamically here -->
+                    <tr id="newPlayerRow">
+                        <td></td>
+                        <td><input type="text" name="playerName" placeholder="Nouveau joueur"></td>
+                        <td>
+                            <input type="color" name="playerColor" value="#ff0000">
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm" id="createPlayerBtn">Créer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+	
 	<script>
-		window.joueurs = {{ joueurs|json_encode|raw }};
+		window.players = {{ players|json_encode|raw }};
 	</script>
 	<script type="module" src="/javascripts/menu/main.js"></script>
 {% endblock %}

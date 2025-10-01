@@ -6,7 +6,7 @@ import {
     getFiguresInf,
     getFiguresFixes,
 } from "./config.js";
-import { setInputValue } from "./ui.js";
+import { setInputValue } from "./ui.js"; 
 
 export function recalcAll() {
     const figures = getFigures();
