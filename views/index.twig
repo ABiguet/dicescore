@@ -86,7 +86,7 @@
                             </thead>
                             <tbody id="playersTableBody">
                                 {% for playerDb in playersDb %}
-                                    <tr>
+                                    <tr data-player-id="{{ playerDb.id }}" data-player-name="{{ playerDb.name }}" data-player-color="{{ playerDb.color }}">
                                         <td class="text-center">
                                             <a href="#" class="add-player-to-game-btn text-success" 
                                               data-player-id="{{ playerDb.id }}"
