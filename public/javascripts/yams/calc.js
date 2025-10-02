@@ -1,5 +1,5 @@
 // yams/calc.js
-import { state, saveState } from "./state.js";
+import { state, saveState, debouncedSave } from "./state.js";
 import {
     getFigures,
     getFiguresSup,
@@ -46,5 +46,5 @@ export function recalcAll() {
         }
         setInputValue(`total_joueur_${playerId}_global`, totalTurbo);
     }
-    saveState();
+    debouncedSave();
 }

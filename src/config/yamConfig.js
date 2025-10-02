@@ -22,10 +22,15 @@ const figures = [
 ];
 
 const modes = {
-    classic: { name: 'Classique', columns: [{ label: '' }] },
+    classic: { name: 'Classique', columns: [{ label: '' }], key: 'classic' },
     turbo: {
         name: 'Turbo',
-        columns: [{ label: '<i class="bi bi-arrow-down"></i>' }, { label: '<i class="bi bi-arrow-up"></i>' }, { label: '<i class="bi bi-arrow-down-up"></i>' }],
+        columns: [
+            { label: '<i class="bi bi-arrow-down"></i>' }, 
+            { label: '<i class="bi bi-arrow-up"></i>' }, 
+            { label: '<i class="bi bi-arrow-down-up"></i>' }
+        ],
+        key: 'turbo',
     },
 };
 
