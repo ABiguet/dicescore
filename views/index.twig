@@ -40,29 +40,26 @@
 
                     <hr>
 
-                    <!-- Ajouter joueur temporaire -->
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Ajouter un joueur :</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="newPlayerName" placeholder="Nom du joueur">
-                            <button class="btn btn-primary" id="addPlayerBtn">
-                                <i class="bi bi-plus-circle me-1"></i>Ajouter
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- Liste des joueurs pour la partie -->
                     <div class="mb-4">
                         <label class="form-label fw-bold">Joueurs sélectionnés :</label>
-                        <ul id="playerList" class="list-group"></ul>
+                        <ul id="playerList" class="list-group">
+                        {% for player in players %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center player-input" data-player-id="{{ player.id }}">
+                                <span class="player-name">{{ player.name }}</span>
+                                <input type="color" name="player-color" value="{{ player.color }}">
+                                <button class="btn btn-danger btn-sm remove-player-btn" data-player-id="{{ player.id }}">Supprimer</button>
+                            </li>
+                        {% endfor %}
+                        </ul>
                         <div class="text-muted small mt-2" id="playerCount">Aucun joueur sélectionné</div>
                     </div>
 
                     <!-- Bouton démarrer -->
                     <div class="d-grid">
-                        <button class="btn btn-success btn-lg" id="newGameBtn">
+                        <a href="/game"><button class="btn btn-success btn-lg" id="newGameBtn">
                             <i class="bi bi-play-fill me-2"></i>Démarrer la partie
-                        </button>
+                        </button></a>
                     </div>
                 </div>
             </div>
@@ -78,7 +75,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="playersTable">
                             <thead class="table-light">
                                 <tr>
                                     <th width="10%" class="text-center">Action</th>
@@ -91,7 +88,11 @@
                                 {% for playerDb in playersDb %}
                                     <tr>
                                         <td class="text-center">
-                                            <a href="#" class="add-player-to-game-btn text-success" title="Ajouter à la partie">
+                                            <a href="#" class="add-player-to-game-btn text-success" 
+                                              data-player-id="{{ playerDb.id }}"
+                                              data-player-name="{{ playerDb.name }}"
+                                              data-player-color="{{ playerDb.color }}"
+                                              title="Ajouter à la partie">
                                                 <i class="bi bi-plus-circle fs-5"></i>
                                             </a>
                                         </td>
@@ -100,7 +101,7 @@
                                             <input type="color" class="form-control form-control-color" name="player-color" value="{{ playerDb.color }}" title="Couleur du joueur">
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn btn-outline-danger btn-sm delete-player-btn" data-player-id="{{ playerDb.id }}" title="Supprimer le joueur">
+                                            <button class="btn btn-outline-danger btn-sm remove-player-btn" data-player-id="{{ playerDb.id }}" title="Supprimer le joueur">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>
@@ -138,5 +139,5 @@
 	<script>
 		window.players = {{ players|json_encode|raw }};
 	</script>
-	<script type="module" src="/javascripts/menu/main.js"></script>
+	<script type="module" src="/javascripts/menu.js"></script>
 {% endblock %}
