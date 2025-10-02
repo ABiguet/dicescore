@@ -1,7 +1,5 @@
 node_modules/
 public/images/
-public/stylesheets/
-public/javascripts/
 logs/
 dist/
 build/

@@ -1,207 +1,211 @@
 /* Extra small input for compact score fields */
 .input-xs {
-    height: 1.5em;
-    padding: 0 2px;
-    font-size: 0.75em;
-    line-height: 1em;
+  height: 1.5em;
+  padding: 0 2px;
+  font-size: 0.75em;
+  line-height: 1em;
 }
 
 /* Coche verte pour les cases à cocher de validation */
-input[type="checkbox"].check-green:checked {
-    accent-color: #28a745;
+input[type='checkbox'].check-green:checked {
+  accent-color: #28a745;
 }
 
 body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 50px;
+  font:
+    14px 'Lucida Grande',
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 
 a {
-    color: #00b7ff;
+  color: #00b7ff;
 }
 
 a:visited {
-    color: #00b7ff;
+  color: #00b7ff;
 }
 
 .add-player-to-game-btn {
-    color: #28a745 !important;
-    font-size: 1.2em;
+  color: #28a745 !important;
+  font-size: 1.2em;
 }
 
 /* === STYLES POUR LA PAGE DE JEU === */
 
 /* Container du tableau de jeu */
 .game-table-container {
-    overflow-x: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 /* Tableau de jeu principal */
 .game-table {
-    margin-bottom: 0;
-    font-size: 0.9rem;
-    white-space: nowrap;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 /* En-têtes du tableau */
 .game-table thead th {
-    border: 2px solid #fff;
-    padding: 0.5rem 0.25rem;
-    vertical-align: middle;
-    font-size: 0.8rem;
-    min-width: 80px;
+  border: 2px solid #fff;
+  padding: 0.5rem 0.25rem;
+  vertical-align: middle;
+  font-size: 0.8rem;
+  min-width: 80px;
 }
 
 /* Colonne des figures */
 .figure-column {
-    background: #343a40 !important;
-    color: white;
-    font-weight: bold;
-    min-width: 150px !important;
-    position: sticky;
-    left: 0;
-    z-index: 10;
+  background: #343a40 !important;
+  color: white;
+  font-weight: bold;
+  min-width: 150px !important;
+  position: sticky;
+  left: 0;
+  z-index: 10;
 }
 
 /* Colonnes des joueurs */
 .player-column {
-    min-width: 80px !important;
-    max-width: 100px !important;
+  min-width: 80px !important;
+  max-width: 100px !important;
 }
 
 /* Header des joueurs */
 .player-header {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .player-name {
-    font-weight: bold;
-    font-size: 0.8rem;
+  font-weight: bold;
+  font-size: 0.8rem;
 }
 
 .column-label {
-    font-size: 0.7rem;
-    opacity: 0.9;
+  font-size: 0.7rem;
+  opacity: 0.9;
 }
 
 /* Cellules du tableau */
 .game-cell {
-    padding: 0.25rem !important;
-    vertical-align: middle !important;
-    border: 1px solid #dee2e6;
+  padding: 0.25rem !important;
+  vertical-align: middle !important;
+  border: 1px solid #dee2e6;
 }
 
 /* Labels des figures */
 .figure-label {
-    background: #f8f9fa;
-    font-weight: 600;
-    text-align: left !important;
-    padding: 0.4rem 0.6rem !important;
-    border-right: 2px solid #dee2e6;
-    position: sticky;
-    left: 0;
-    z-index: 5;
+  background: #f8f9fa;
+  font-weight: 600;
+  text-align: left !important;
+  padding: 0.4rem 0.6rem !important;
+  border-right: 2px solid #dee2e6;
+  position: sticky;
+  left: 0;
+  z-index: 5;
 }
 
 /* Inputs compacts */
 .compact-number {
-    height: 2rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 0.25rem;
-    min-width: 50px;
+  height: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  min-width: 50px;
 }
 
 .compact-input {
-    width: 100%;
+  width: 100%;
 }
 
 .compact-input .btn {
-    padding: 0.25rem 0.4rem;
-    font-size: 0.75rem;
-    border-radius: 0.25rem;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
 }
 
 /* Input en lecture seule */
 .readonly-input {
-    background-color: #e9ecef !important;
-    font-weight: bold;
-    color: #495057;
+  background-color: #e9ecef !important;
+  font-weight: bold;
+  color: #495057;
 }
 
 /* Groupe de checkboxes */
 .checkbox-group {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .checkbox-group .form-check {
-    margin: 0;
+  margin: 0;
 }
 
 .checkbox-group .form-check-input {
-    display: none;
+  display: none;
 }
 
 .checkbox-group .form-check-label {
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #6c757d;
-    transition: all 0.2s;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #6c757d;
+  transition: all 0.2s;
 }
 
 .checkbox-group .form-check-input:checked + .check-success {
-    color: #28a745;
+  color: #28a745;
 }
 
 .checkbox-group .form-check-input:checked + .check-danger {
-    color: #dc3545;
+  color: #dc3545;
 }
 
 .checkbox-group .form-check-label:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Indicateur de couleur */
 .color-indicator {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 /* Lignes alternées */
 .game-table tbody tr:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .game-table tbody tr:hover {
-    background-color: rgba(0, 123, 255, 0.1);
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    body {
-        padding: 20px;
-    }
-    
-    .game-table {
-        font-size: 0.8rem;
-    }
-    
-    .figure-column {
-        min-width: 120px !important;
-    }
-    
-    .player-column {
-        min-width: 60px !important;
-    }
-    
-    .compact-number {
-        height: 1.8rem;
-        font-size: 0.8rem;
-    }
+  body {
+    padding: 20px;
+  }
+
+  .game-table {
+    font-size: 0.8rem;
+  }
+
+  .figure-column {
+    min-width: 120px !important;
+  }
+
+  .player-column {
+    min-width: 60px !important;
+  }
+
+  .compact-number {
+    height: 1.8rem;
+    font-size: 0.8rem;
+  }
 }
